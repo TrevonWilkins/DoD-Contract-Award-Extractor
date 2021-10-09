@@ -55,9 +55,7 @@ for x in results:
     paragraphs.append(str(x)) 
     
 #Monetary Amounts of each paragraph. 
-monetary = []
-organizations = []
-locations = []
+monetary, organizations, locations = [], [], []
 for x in paragraphs:
     amount = re.findall(r'(\$\d+\,\d{3}\,\d{3}\,?\d{0,3})', (x))
     monetary.append(str(amount[0:1]))
