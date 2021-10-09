@@ -15,26 +15,20 @@ def fresh_site():
     htmlresults = soup.find('listing-titles-only')
     links = (str(htmlresults))
     findlinks = re.findall(r'http://www.defense.gov/News/Contracts/Contract/Article/[0-9]{7,7}/', (links))
-    finalhtml = findlinks[0]   
+    finalhtml = findlinks[0]
+    #finalhtml = 'insert something'  #Pulling backdated URLs if needed. This will overrule the previous finalhtml variable.
     return finalhtml
-
 finalhtml = fresh_site()
 
-#Pulling backdated URLs if needed. This will overrule the previous finalhtml variable.
-#finalhtml = 'insert something' 
-
-res = requests.get(finalhtml)
-
-#Begin using BeautifulSoup
-soup = BeautifulSoup(res.text, "html.parser")
-results = soup.find('div', attrs={'class':'body'}).find_all("p") #This gives us the block we should focus on for all articles
-
-#Gets rid of the <p> style and <strong> tags that we dont need.
-def clean_results():
-    del results[0]
+def results_collection():
+    res = requests.get(finalhtml)
+    soup2 = BeautifulSoup(res.text, "html.parser")
+    results = soup2.find('div', attrs={'class':'body'}).find_all("p") #Article content HTML location
+    del results[0] #Gets rid of the <p> style and <strong> tags that we dont need.
     del results[-1]
+    return results
 
-clean_results()
+results = results_collection()
 
 def format_dataframe():
     max_size=2
@@ -72,29 +66,26 @@ for x in paragraphs:
     for key, value in monetary_dic.items():
         monetary = ([str.replace(key, value) for str in monetary])
         
-#Organizations from each paragraph.
+#Organizations collection.
     org_name = re.findall(r'^(.+?),', (x))
     organizations.append(str(org_name))
     organizations_dic = {'<p>':'','\'':'','[':'',']':'','&amp':'','The':'','Inc':'',';':'','.':'','"':''}
     for key, value in organizations_dic.items():
         organizations = ([str.replace(key, value) for str in organizations])
     
-#Locations for contract primary locations. Potential employment?
+#Locations collection. Potential employment?
     loc = re.findall(r'(Alabama|Alaska|Arizona|Arkansas|Australia|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Puerto Rico|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming/)', (x))
     locations.append(str(loc[0:1]))
     locations = list(filter(None, locations))
     locations_dic = {'\'':'','[':'',']':''}
     for key, value in locations_dic.items():
         locations = ([str.replace(key, value) for str in locations])
+
+org_monetary = {organizations[i]: monetary[i] for i in range(len(organizations))} #Merging two lists into a dictionary for the length of dictionary
     
-
-#Merging two lists into a dictionary
-org_monetary = {organizations[i]: monetary[i] for i in range(len(organizations))}
-
 #Prints the Website for easy access
 print("Website:", finalhtml)
 print() ##Add a space in output
-
 
 #Cleaning up data if DataContract file does not exist.
 def Filenoexist():
@@ -103,7 +94,6 @@ def Filenoexist():
     print(df)
     print() ##Add a space in output
     get_chart(df)
-
 
 #Cleaning up data if DataContract does exist.
 def Filedoesexist():
@@ -124,13 +114,11 @@ def Filedoesexist():
     print(df_location)
     get_chart(df)
 
-    
 #If statement that executes either the filenoexist or filedoesexist function in or instead of the presence of the DefenseContracts_Data.csv   
 if os.path.isfile('./DefenseContracts_Data.csv')==False:
     Filenoexist()
 else: 
     Filedoesexist()
-    
     
 #Uninvoked Functions:
 ## This will be used to merge CSV files whenever(quarterly, semi-quarterly, yearly). We will need to point to the correct folders for CSV retrieval.  
