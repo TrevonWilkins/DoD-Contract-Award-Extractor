@@ -27,7 +27,6 @@ def results_collection():
     del results[0] #Gets rid of the <p> style and <strong> tags that we dont need.
     del results[-1]
     return results
-
 results = results_collection()
 
 def format_dataframe():
