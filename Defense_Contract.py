@@ -63,30 +63,28 @@ for x in results:
     
 #Monetary Amounts of each paragraph. 
 monetary = []
+organizations = []
+locations = []
 for x in paragraphs:
     amount = re.findall(r'(\$\d+\,\d{3}\,\d{3}\,?\d{0,3})', (x))
     monetary.append(str(amount[0:1]))
-    dic = {'$':'',',':'','\'':'','[':'',']':''}
-    for key, value in dic.items():
+    monetary_dic = {'$':'',',':'','\'':'','[':'',']':''}
+    for key, value in monetary_dic.items():
         monetary = ([str.replace(key, value) for str in monetary])
         
 #Organizations from each paragraph.
-organizations = []
-for x in paragraphs:
     org_name = re.findall(r'^(.+?),', (x))
     organizations.append(str(org_name))
-    dic = {'<p>':'','\'':'','[':'',']':'','&amp':'','The':'','Inc':'',';':'','.':'','"':''}
-    for key, value in dic.items():
+    organizations_dic = {'<p>':'','\'':'','[':'',']':'','&amp':'','The':'','Inc':'',';':'','.':'','"':''}
+    for key, value in organizations_dic.items():
         organizations = ([str.replace(key, value) for str in organizations])
     
 #Locations for contract primary locations. Potential employment?
-locations = []
-for x in paragraphs:
     loc = re.findall(r'(Alabama|Alaska|Arizona|Arkansas|Australia|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Puerto Rico|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming/)', (x))
     locations.append(str(loc[0:1]))
     locations = list(filter(None, locations))
-    dic = {'\'':'','[':'',']':''}
-    for key, value in dic.items():
+    locations_dic = {'\'':'','[':'',']':''}
+    for key, value in locations_dic.items():
         locations = ([str.replace(key, value) for str in locations])
     
 
