@@ -6,6 +6,9 @@ from bs4 import BeautifulSoup #Beautifulsoup
 import pandas as pd
 import numpy as np
 import os
+import time
+
+start_time = time.time()
 
 #Pulling a Fresh Site
 def fresh_site():
@@ -50,9 +53,7 @@ def get_chart(df):
     #df.plot.pie(y='Monetary',figsize=(10, 10),autopct='%1.1f%%', startangle=90)
 
 #Paragraph collection
-paragraphs = []
-for x in results: 
-    paragraphs.append(str(x)) 
+paragraphs = [str(x) for x in results]
     
 #Monetary Amounts of each paragraph. 
 monetary, organizations, locations = [], [], []
@@ -117,6 +118,9 @@ if os.path.isfile('./DefenseContracts_Data.csv')==False:
 else: 
     Filedoesexist()
     
+print()
+print("Program Runtime: %s seconds" % (time.time() - start_time))
+
 #Uninvoked Functions:
 ## This will be used to merge CSV files whenever(quarterly, semi-quarterly, yearly). We will need to point to the correct folders for CSV retrieval.  
     #def merge_csv():
