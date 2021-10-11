@@ -20,3 +20,8 @@ Re
 Requests
 OS
 Time
+
+====================
+LINUX CRONTAB SYNTAX
+==================== 
+10 17 * * 1-5 cd [Script Directory] && [./Defense_Contract.py]
