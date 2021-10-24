@@ -5,8 +5,6 @@ DOD-Contract Award Extractor(DOD-CAE) by Trevon Wilkins
 
 This program can be utilized for capturing and analyzing recent awardees of Department of Defense contracts. The data collected includes Organization Name, Location, and Monetary amounts which can be used in a varitey of ways such as investments, career research, DOD interests, etc.
 
-*This distributions source code is intended only for research and evaluation purposes.
-
 ===============================
            Purpose
 ===============================
@@ -18,7 +16,6 @@ The DOD publishes contract wins in monetary amounts greater than 7.5 million dai
 ===============================
 
 It is possible to install and run this script on most platforms although it may require some experience with Python programming.
-The script should work with Python 3 or later and requires a few open source Python modules.
 
 Dependencies(Linux Installation(Debian)):
 - apt install python3.9
@@ -40,7 +37,9 @@ Dependencies(Linux Installation(Debian)):
 Issue Tracker: https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues
 
 ===============================
-          DISCLAIMER
+         DISCLAIMERS
 ===============================
 
 ***The content derived and analyzed from this program is for informational purposes only, you should not construe any such information or other material as legal, tax, investment, financial, or other advice.***
+
+***This distributions source code is intended only for research and evaluation purposes.***
