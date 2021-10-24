@@ -30,6 +30,7 @@ Issue Tracker: https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues
 
 ### DISCLAIMERS
 <hr/>
+
 ***The content derived and analyzed from this program is for informational purposes only, you should not construe any such information or other material as legal, tax, investment, financial, or other advice.***
 
 ***This distributions source code is intended only for research and evaluation purposes.***
