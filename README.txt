@@ -15,7 +15,7 @@ The DOD publishes contract wins in monetary amounts greater than 7.5 million dai
          PREREQUISITES
 ===============================
 
-It is possible to install and run this script on most platforms although it may require some experience with Python programming.
+This script was developed to operate on Debian, however, it is possible to install and run this script on most platforms although it may require some experience with Python programming.
 
 Dependencies(Linux Installation(Debian)):
 - apt install python3.9
