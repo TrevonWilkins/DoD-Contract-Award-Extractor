@@ -1,4 +1,4 @@
-# DOD-Contract Award Extractor(DOD-CAE) by Trevon Wilkins
+# DOD-Contract Award Extractor(DOD-CAE)
 
 
 ## OVERVIEW
