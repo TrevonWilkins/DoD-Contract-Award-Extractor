@@ -1,4 +1,4 @@
-# DOD-Contract Award Extractor(DOD-CAE)
+# DOD-CAE(Contract Award Extractor)
 
 
 ## OVERVIEW
