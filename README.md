@@ -3,7 +3,7 @@
 
 ## OVERVIEW
 
-This program can be utilized for capturing and analyzing recent awardees of Department of Defense contracts. The data collected includes Organization Name, Location, and Monetary amounts which can be used in a varitey of ways such as investments, career research, DOD interests, etc.
+This program can be utilized for capturing and analyzing recent awardees of Department of Defense contracts. The data collected includes Organization Name, Location, and Monetary amounts which can be used in a variety of ways such as investments, career research, DOD interests, etc.
 
 ## PURPOSE
 
