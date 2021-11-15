@@ -2,7 +2,7 @@
 # DOD-CAE (Contract Award Extractor)
 
 ## OVERVIEW
-This program extracts Department of Defense awarded contracts data that can be used as a baseline prior to performing further analysis in investing, career research, and DoD interests.
+This program extracts Department of Defense awarded contracts data that can be used as a baseline to further analysis in investing, career research, and DoD interests.
 
 ## PREREQUISITES
 
