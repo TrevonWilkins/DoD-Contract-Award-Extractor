@@ -2,7 +2,7 @@
 # DOD-CAE (Contract Award Extractor)
 
 ## OVERVIEW
-The DOD-CAE program extracts contract-by-contract information that can be used to create a trend chart for further analysis in areas such as investing, career research, and Department of Defense (DoD/DOD) interests.
+This program extracts contract-by-contract information about Department of Defense recent contract awards. The data collected can be used to create a trend chart for further analysis in areas such as investing, career research, and Department of Defense (DoD/DOD) interests.
 
 ## PREREQUISITES
 
