@@ -11,9 +11,6 @@ import time
 import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
 from openpyxl import load_workbook
-from IPython.display import display_html
-from itertools import chain,cycle
-from matplotlib.backends.backend_pdf import PdfPages
 
 links = []
 def program_mode():
@@ -81,7 +78,7 @@ def backdate():
             results = soup2.find('div', attrs={'class':'body'}).find_all("p") #Article content HTML location
             return results
         results = results_collection()
-##Maybe place define results collection function here and map the results to a pandas dataframe.
+        
         def visited_links():
             pd.set_option('display.max_colwidth', None)
             visited_links = [x for x in links]
@@ -206,4 +203,3 @@ program_mode()
 backdate()
 print()
 rename_file()
-    
