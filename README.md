@@ -1,5 +1,5 @@
 
-# DOD-CAE (Contract Award Extractor)
+# DoDCAE (Department of Defense Contract Award Extractor)
 
 ## OVERVIEW
 This program extracts Department of Defense awarded contracts data that can be used as a baseline to further analysis in investing, career research, and DoD interests.
@@ -16,7 +16,6 @@ The save directory structure of the excel writing portion of the script will nee
 - apt install python3.9
 - apt install python3-pip
 - pip install pandas openpyxl bs4 
-- pip install ipython tabulate
 
 ## RUNNING  DOD-CAE
 
