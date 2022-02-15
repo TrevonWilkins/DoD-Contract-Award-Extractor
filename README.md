@@ -17,7 +17,7 @@ The save directory structure of the excel writing portion of the script will nee
 - apt install python3-pip
 - pip install pandas openpyxl bs4 
 
-## RUNNING  DOD-CAE
+## RUNNING  DoD-CAE
 
 - Download DODCAE.py
 - Make the script executable [chmod+x DODCAE.py]
