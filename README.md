@@ -23,6 +23,7 @@ The save directory structure of the excel writing portion of the script will nee
 - Make the script executable [chmod+x DODCAE.py]
 - Run it [./DODCAE.py]
 
+![alt text](https://github.com/TrevonWilkins/DOD-Contract-Award-Extractor/blob/main/Quarter%20Analysis.png?raw=true)
 ## CONTRIBUTION
 Issue Tracker: [https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues](https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues)
 
@@ -33,4 +34,3 @@ The content derived and analyzed from this program is for informational purposes
 
 
 This distributions source code is intended only for research and evaluation purposes.
-![alt text](https://github.com/TrevonWilkins/DOD-Contract-Award-Extractor/blob/main/Quarter%20Analysis.png?raw=true)
