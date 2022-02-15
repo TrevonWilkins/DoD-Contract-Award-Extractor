@@ -33,3 +33,4 @@ The content derived and analyzed from this program is for informational purposes
 
 
 This distributions source code is intended only for research and evaluation purposes.
+![alt text](https://github.com/TrevonWilkins/DOD-Contract-Award-Extractor/blob/main/Quarter%20Analysis.png?raw=true)
