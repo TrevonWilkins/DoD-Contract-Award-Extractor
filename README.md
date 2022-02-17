@@ -1,10 +1,9 @@
-
-# DoDCAE (Department of Defense Contract Award Extractor)
+## DoD Contract Award Extractor
 ![alt text](https://github.com/TrevonWilkins/DOD-Contract-Award-Extractor/blob/main/Graphic%20Visualization%203.PNG?raw=true)
-## OVERVIEW
+### OVERVIEW
 DoDCAE is a program that extracts data points from over 14,000 Department of Defense (DoD) contracts. The collected data enables users to conduct trend analysis of investment, career, and technology trends in the DoD. My particular use case with this project is to correlate financial market events and defense data to provide up-to-date translation of government contracts awards and their effect on organizations financial solubility.
 
-## PREREQUISITES
+### PREREQUISITES
 
 This program was developed for operation on Debian Linux; however, it is possible to install and run this program on most platforms.
  
@@ -17,7 +16,7 @@ The save directory structure of the excel writing portion of the script will nee
 - apt install python3-pip
 - pip install pandas openpyxl bs4 
 
-## RUNNING  DoD-CAE
+### RUNNING  DoD-CAE
 
 - Download DODCAE.py
 - Make the script executable [chmod+x DODCAE.py]
@@ -28,7 +27,7 @@ The save directory structure of the excel writing portion of the script will nee
 Issue Tracker: [https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues](https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues)
 
 
-## DISCLAIMERS
+### DISCLAIMERS
 
 The content derived and analyzed from this program is for informational purposes only, you should not construe any such information or other material as legal, tax, investment, financial, or other advice.
 
