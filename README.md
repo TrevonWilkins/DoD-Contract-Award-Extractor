@@ -23,7 +23,7 @@ The save directory structure of the excel writing portion of the script will nee
 - Run it [./DODCAE.py]
 
 ![alt text](https://github.com/TrevonWilkins/DOD-Contract-Award-Extractor/blob/main/Quarter%20Analysis.png?raw=true)
-## CONTRIBUTION
+### CONTRIBUTION
 Issue Tracker: [https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues](https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues)
 
 
