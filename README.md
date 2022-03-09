@@ -8,9 +8,7 @@ DoDCAE (Department of Defense Contract Award Extractor) is a multipurpose tool t
 ### PREREQUISITES
 This program was developed on Linux; however, it is possible to install and run this program on most platforms.
 
-**Requirements:**
-
-Python Libraries:
+**Python Libraries Required:**
 - requests
 - re
 - pandas
