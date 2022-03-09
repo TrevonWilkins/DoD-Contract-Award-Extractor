@@ -1,7 +1,8 @@
 # DoDCAE (Contract Award Extractor)
-![alt text](https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/DoDCAE%20Power%20BI.png?raw=true)
+
 ### OVERVIEW
 DoDCAE (Department of Defense Contract Award Extractor) is a multipurpose tool that extracts multi-variate data points from 18,700+ Department of Defense (DoD) contracts providing deep insights into defense sector fund distributions. DoDCAE is a recruitment and research tool that enables job and career seekers to identify defense contracting employment opportunities based upon the organization, contract start date, and location.
+![alt text](https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/DoDCAE%20Power%20BI.png?raw=true)
 
 ### PREREQUISITES
 
