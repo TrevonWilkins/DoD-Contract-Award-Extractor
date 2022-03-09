@@ -10,9 +10,16 @@ This program was developed on Linux; however, it is possible to install and run 
 
 **Dependencies:**
 
-- apt install python3.9
-- apt install python3-pip
-- pip install pandas openpyxl bs4 
+Python3.6+
+
+Python Libraries:
+-requests
+-re
+-pandas
+-time
+-hashlib
+-BeautifulSoup
+-tqdm
 
 ### CONTRIBUTION
 Issue Tracker: [https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues](https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues)
