@@ -10,8 +10,6 @@ This program was developed on Linux; however, it is possible to install and run 
 
 **Requirements:**
 
-Python3.6+
-
 Python Libraries:
 - requests
 - re
