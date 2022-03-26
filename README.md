@@ -9,13 +9,15 @@ DoDCAE (Department of Defense Contract Award Extractor) is a multipurpose tool t
 This program was developed on 64-bit Linux; however, it is possible to install and run this program on most platforms with minor code modifications.
 
 **Python Libraries Required:**
-- requests
 - re
-- pandas
 - time
-- hashlib
-- BeautifulSoup
 - tqdm
+- pandas
+- hashlib
+- requests
+- threading
+- BeautifulSoup
+- ThreadPoolExecutor
 
 ### CONTRIBUTION
 Issue Tracker: [https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues](https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues)
