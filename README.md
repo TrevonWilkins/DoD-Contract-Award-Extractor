@@ -23,7 +23,7 @@ This program was developed on 64-bit Linux; however, it is possible to install a
 - hashlib
 - requests
 - threading
-- BeautifulSoup
+- BeautifulSoup 
 - ThreadPoolExecutor
 
 ### CONTRIBUTION
