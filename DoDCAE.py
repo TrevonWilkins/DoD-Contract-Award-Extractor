@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup
 from tqdm import tqdm
 from requests.sessions import Session
 from concurrent.futures import ThreadPoolExecutor
-from threading import Thread,local
 from datetime import date
 
 def dodcae(start_date = str, end_date = str, csv = False):
@@ -36,7 +35,6 @@ def dodcae(start_date = str, end_date = str, csv = False):
     if re.findall('r[0-9]{4}-[0-9]{2}-[0-9]{2}', start_date) or re.findall('r[0-9]{4}-[0-9]{2}-[0-9]{2}', end_date) == [""]:
         return "Invalid date format. Expected format YYYY-MM-DD"
    
-    thread_local = local()
     backdate_url = f'https://www.defense.gov/News/Contracts/StartDate/{start_date}/EndDate/{end_date}/'
 
     #Input validation
@@ -69,18 +67,13 @@ def dodcae(start_date = str, end_date = str, csv = False):
     link_hashes = list(map(lambda x:(x, hashlib.md5(x.encode('utf-8')).hexdigest())
 , links))
     
-    #The below get_session, download_link, and download_all functions multithread our article downloads to speed up code execution.
-    def get_session() -> Session:
-        if not hasattr(thread_local,'session'):
-            thread_local.session = requests.Session()
-        return thread_local.session
+    #The below download_link, and download_all functions multithread our article downloads to speed up code execution.
+
     def download_link(x:str):
-        requests = get_session()
-        with requests.get(x) as response:
-            results = BeautifulSoup(response.text, "html.parser")
-            response.close()
+        with requests.Session() as response:
+            results = BeautifulSoup(response.get(x).text, "html.parser")
         return results
-    def download_all(urls:list) -> None:
+    def download_all(urls:list):
         with ThreadPoolExecutor(max_workers=10) as executor:
             return list(executor.map(download_link,links))   
     links = tqdm(download_all(links))
