@@ -23,8 +23,8 @@ This program was developed on 64-bit Linux; however, it is possible to install a
 - hashlib
 - requests
 - threading
-- BeautifulSoup 
-- ThreadPoolExecutor
+- beautifulsoup
+- concurrent.futures
 
 ### CONTRIBUTION
 Issue Tracker: [https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues](https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues)
