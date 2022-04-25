@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 from tqdm import tqdm
 from requests.sessions import Session
 from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 from datetime import date
 
 def dodcae(start_date = str, end_date = str, csv = False):
@@ -51,31 +52,22 @@ def dodcae(start_date = str, end_date = str, csv = False):
         return int((delta.days * .715)/10)
     links.extend([f'{backdate_url}?Page={i+1}' for i in range(1,link_constant()+1)])
     
-    #This function takes all pages and searches for individual article links
-    def grab_page_links(links,new_list=[], x=0):
-        if x == len(links):
-            return new_list
-        else:
-            with requests.get(links[x]) as response:
-                search = BeautifulSoup(response.text, "html.parser")
-                response.close()
-            [new_list.append(str) for str in re.findall(r'http://www.defense.gov/News/Contracts/Contract/Article/[0-9]{7,7}/', (str(search.find_all('listing-titles-only')))) if str not in new_list]
-        return grab_page_links(links, new_list = new_list, x = x+1)
-    links = grab_page_links(links)
-    
-    #Converts all links gathered into a md5 hash that can be later used for database integrity purposes. Will need to throw in a salt to strengthen.
-    link_hashes = list(map(lambda x:(x, hashlib.md5(x.encode('utf-8')).hexdigest())
-, links))
-    
     #The below download_link, and download_all functions multithread our article downloads to speed up code execution.
-
     def download_link(x:str):
         with requests.Session() as response:
             results = BeautifulSoup(response.get(x).text, "html.parser")
         return results
     def download_all(urls:list):
-        with ThreadPoolExecutor(max_workers=10) as executor:
+        with ThreadPoolExecutor(max_workers=None) as executor:
             return list(executor.map(download_link,links))   
+            
+    #The links variable up to this point contains page links, the below thread function pulls article links from each pulled page
+    links = download_all(links)
+    #We deduplicate results of the links variable below to conserve bandwidth 
+    links = list(set([str for str in re.findall(r'http://www.defense.gov/News/Contracts/Contract/Article/[0-9]{7,7}/', str(links))])) 
+    #Converts all links gathered into a md5 hash that can be later used for database integrity purposes.
+    link_hashes = list(map(lambda x:(x, hashlib.md5(x.encode('utf-8')).hexdigest()), links))
+    #pulls paragraphs from each article w/ progress bar
     links = tqdm(download_all(links))
     
     #This function grabs all paragraphs of each article, cleanses a few tags and returns the results to a variable (paragraphs).
@@ -102,7 +94,6 @@ def dodcae(start_date = str, end_date = str, csv = False):
 
     #Flattens our nested list of list into one single list.
     paragraphs = [str(item) for sublist in paragraphs for item in sublist]
-
     #Creates list of dates we encounter as we sift through each link. Used for appension to EACH paragraph.
     contract_date = list(map(lambda x:re.findall(r'[A-Z]{1,1}[a-z]{2,8}\s[0-9]{1,2},\s[0-9]{4,4}',(str(x.find("meta", property="og:title")["content"]) if str(x.find("meta", property="og:title")["content"]) else "no date given"))[0], links))
 
@@ -118,8 +109,8 @@ def dodcae(start_date = str, end_date = str, csv = False):
     paragraphs = para_aggregation(paragraphs, count, contract_date,link_hashes)
 
     #Regex search function to build a singular table for exportation.
+    global regex_run #configured as global variable so our multiprocessing function could see it
     def regex_run(x):
-    
         #Processing Dictionaries
         month_translation = {'January':[1,'Q1'],'February':[2,'Q1'],'March':[3,'Q1'],'April':[4,'Q2'],'May':[5,'Q2'],'June':[6,'Q2'],'July':[7,'Q3'],'August':[8,'Q3'],'September':[9,'Q3'],'October':[10,'Q4'],'November':[11,'Q4'],'December':[12,'Q4']}
         organizations_dic = {'<p>':'','\'':'','[':'',']':'','&amp':'','The':'','Inc':'',';':'','.':'','"':''}
@@ -133,7 +124,6 @@ def dodcae(start_date = str, end_date = str, csv = False):
         quarter, month = month_translation.get(month)[1], month_translation.get(month)[0]
         link = re.findall(r'http://www.defense.gov/News/Contracts/Contract/Article/[0-9]{7,7}/', (x))[0]
         link_hash = re.findall(r'[0-9a-fA-F]{32}', (x))[0]
-      
         #Cleansing 
         for key, value in locations_dic.items():
             locations = "".join([str.replace(key, value) for str in locations])  
@@ -142,7 +132,9 @@ def dodcae(start_date = str, end_date = str, csv = False):
         for key, value in monetary_dic.items():
             monetary = "".join([str.replace(key, value) for str in monetary])
         return organizations, monetary, locations, month, day, year, quarter, link, link_hash
-    data = list(map(regex_run, paragraphs))
+        
+    with ProcessPoolExecutor(max_workers=None) as executor:
+        data = list(executor.map(regex_run, paragraphs))
     data = list(filter(lambda tuple_spaces: '' not in tuple_spaces, data)) #Rids empty tuples
 
     #Cleanse Data and Export to CSV.
