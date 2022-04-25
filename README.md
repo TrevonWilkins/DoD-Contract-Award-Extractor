@@ -6,14 +6,15 @@ DoDCAE (Department of Defense Contract Award Extractor) is a multipurpose tool t
 <p align="center">
   <img src="https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/DoDCAE_BI.png" />
 </p>
-![Graphic Visualization](https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/DoDCAE_BI.png?raw=true)
 
 ### PURPOSE
 DoDCAE was developed to efficiently identify IT service contracting organizations that are beginning to gain more dominance and ground on industry beasts such as Lockheed Martin, General Dynamics, and Northrop Grumman. The DoD publishes contract wins in monetary amounts greater than 7.5 million daily (Monday-Friday). This data has potential significance in stock breakdowns as some of the award quantities may positively impact an organization's bottom-line year over year and their exposure to repeat business within defense contracting. 
 
 Example: We noticed an uptick in cybercrime throughout the pandemic, which ignited an uptick in cybersecurity consultations, thus allowing lesser recognized contracting companies to gain footing via subcontracting and prime awarding cyber gigs on DoD contracts that can be personally tracked using DoDCAE.
 
-![Graphic Visualization](https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/Graphic%20Visualization%202.PNG?raw=true)
+<p align="center">
+  <img src="https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/Graphic%20Visualization%202.PNG" />
+</p>
 
 *DoDCAE tracks all contracting awards. It's not exclusive to cyber-related awarding.
 
