@@ -14,7 +14,7 @@ from concurrent.futures import ProcessPoolExecutor
 from datetime import date
 
 def dodcae(start_date = str, end_date = str, csv = False):
-    
+ 
     """
     Take a given date range and return Department of Defense
     awards within the given range.
@@ -42,7 +42,7 @@ def dodcae(start_date = str, end_date = str, csv = False):
     if backdate_url == re.findall(r'https://www.defense.gov/News/Contracts/StartDate/[0-9]{4}-[0-9]{2}-[0-9]{2}/EndDate/[0-9]{4}-[0-9]{2}-[0-9]{2}/', (backdate_url))[0]:
         links = [backdate_url]
         
-    # This function is a custom algortihm that defines amount of pages on defense.gov to search
+    # This function is a custom algorithm that defines amount of pages on defense.gov to search
     def link_constant(start_date = start_date, end_date = end_date): 
         #Link_constant Algorithm =(delta.days *avg#wks_mon * max#links_wk/avg#day_mon)/(max_#links_pg)
         start_date = [int(x.lstrip('0')) for x in start_date.replace('-',',').split(',')]
@@ -84,13 +84,7 @@ def dodcae(start_date = str, end_date = str, csv = False):
     paragraphs = list(map(results_collection, links))
 
     #Creates list of how many paragraphs exists from each link that we use to pass in our para aggregation function.
-    def gather_length(paragraphs, count = [], x = 0):
-        if x == len(paragraphs):
-            return count
-        else:
-            count.append(len(paragraphs[x]))
-        return gather_length(paragraphs, count = count, x = x+1)
-    count = gather_length(paragraphs)
+    count = list(map(lambda x:(len(x)), paragraphs))
 
     #Flattens our nested list of list into one single list.
     paragraphs = [str(item) for sublist in paragraphs for item in sublist]
@@ -99,7 +93,6 @@ def dodcae(start_date = str, end_date = str, csv = False):
 
     #The para_aggregation appends respective contract dates to each paragraph for database granularity.
     def para_aggregation(paragraphs, count, contract_date, link_hashes, new_list = [], x = 0, start = 0):
-        
         if x >= len(count):
             return new_list
         else:
