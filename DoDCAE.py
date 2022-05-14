@@ -66,12 +66,13 @@ def dodcae(start_date = str, end_date = str, csv = False):
     #We deduplicate results of the links variable below to conserve bandwidth 
     links = list(set([str for str in re.findall(r'http://www.defense.gov/News/Contracts/Contract/Article/[0-9]{7,7}/', str(links))])) 
     #Converts all links gathered into a md5 hash that can be later used for database integrity purposes.
-    link_hashes = list(map(lambda x:(x, hashlib.md5(x.encode('utf-8')).hexdigest()), links))
-    #pulls paragraphs from each article w/ progress bar
-    links = tqdm(download_all(links))
+    links = {k:hashlib.md5(k.encode('utf-8')).hexdigest() for k in links}
+    #Pulls paragraphs from each article w/ progress bar
+    paragraphs = tqdm(download_all(list(links.keys())))
     
-    #This function grabs all paragraphs of each article, cleanses a few tags and returns the results to a variable (paragraphs).
+    #Grabs all paragraphs of each article, cleanses a few tags and returns the results to a variable (paragraphs).
     def results_collection(x):
+        contract_date = re.findall(r'[A-Z]{1,1}[a-z]{2,8}\s[0-9]{1,2},\s[0-9]{4,4}',(str(x.find("meta", property="og:title")["content"]) if str(x.find("meta", property="og:title")["content"]) else "no date given"))[0]
         for match in x.find_all(['span', 'a']):
             match.unwrap()
         for p in x.find_all('p'):
@@ -79,27 +80,18 @@ def dodcae(start_date = str, end_date = str, csv = False):
                 del p.attrs['style']
             elif 'class' in p.attrs:
                 del p.attrs['class']
-        results = x.find('div', attrs={'class':'body'}).find_all("p") #Article contents location
-        return results
-    paragraphs = list(map(results_collection, links))
-
-    #Creates list of how many paragraphs exists from each link that we use to pass in our para aggregation function.
-    count = list(map(lambda x:(len(x)), paragraphs))
-
-    #Flattens our nested list of list into one single list.
-    paragraphs = [str(item) for sublist in paragraphs for item in sublist]
-    #Creates list of dates we encounter as we sift through each link. Used for appension to EACH paragraph.
-    contract_date = list(map(lambda x:re.findall(r'[A-Z]{1,1}[a-z]{2,8}\s[0-9]{1,2},\s[0-9]{4,4}',(str(x.find("meta", property="og:title")["content"]) if str(x.find("meta", property="og:title")["content"]) else "no date given"))[0], links))
-
+        results = [str(x) for x in x.find('div', attrs={'class':'body'}).find_all("p")]
+        return contract_date, results 
+    paragraphs = {k[0]: k[1] for k in list(map(results_collection, paragraphs))}
+    
     #The para_aggregation appends respective contract dates to each paragraph for database granularity.
-    def para_aggregation(paragraphs, count, contract_date, link_hashes, new_list = [], x = 0, start = 0):
-        if x >= len(count):
+    def para_aggregation(paragraphs = paragraphs, links = links, new_list = [], x = 0):
+        if x >= len(paragraphs):
             return new_list
         else:
-            end = sum(count[0:x]) + sum(count[x:(x+1)])
-            new_list.extend(["".join([item, "".join([contract_date[x], link_hashes[x][0], " ", link_hashes[x][1]])]) for item in paragraphs[start:end]])
-        return para_aggregation(paragraphs, count, contract_date, link_hashes, new_list = new_list, x = x+1, start = end)
-    paragraphs = para_aggregation(paragraphs, count, contract_date,link_hashes)
+            new_list.extend(["".join([item, "".join([list(paragraphs.items())[x][0], list(links.items())[x][0], " ", list(links.items())[x][1]])]) for item in list(paragraphs.values())[x]])
+        return para_aggregation(paragraphs, links, new_list = new_list, x = x+1)
+    paragraphs = para_aggregation()
 
     #Regex search function to build a singular table for exportation.
     global regex_run #configured as global variable so our multiprocessing function could see it
