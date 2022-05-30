@@ -4,7 +4,7 @@
 DoDCAE (Department of Defense Contract Award Extractor) is a multipurpose tool that extracts multi-variate data points from 19,400+ Department of Defense (DoD) contracts providing deep insights into defense sector fund distributions. DoDCAE is used as a recruitment, career, and investment research tool that enables users to identify defense contracting employment and investment opportunities based on 9 uniquely extracted variables.
 
 <p align="center">
-  <img src="https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/DoDCAE_BI.png" />
+  <img src="https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/examples/DoDCAE_BI.png" />
 </p>
 
 ### PURPOSE
@@ -13,24 +13,13 @@ DoDCAE was developed to efficiently identify IT service contracting organization
 Example: We noticed an uptick in cybercrime throughout the pandemic, which ignited an uptick in cybersecurity consultations, thus allowing lesser recognized contracting companies to gain footing via subcontracting and prime awarding cyber gigs on DoD contracts that can be personally tracked using DoDCAE.
 
 <p align="center">
-  <img src="https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/Graphic%20Visualization%202.PNG" />
+  <img src="https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/examples/Graphic%20Visualization%202.PNG" />
 </p>
 
 *DoDCAE tracks all contracting awards. It's not exclusive to cyber-related awarding.
 
 ### PREREQUISITES
 This program was developed on 64-bit Linux; however, it is possible to install and run this program on most platforms with minor code modifications.
-
-**Python Libraries Required:**
-- re
-- time
-- tqdm
-- pandas
-- hashlib
-- requests
-- threading
-- beautifulsoup
-- concurrent.futures
 
 ### CONTRIBUTION
 Issue Tracker: [https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues](https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues)
