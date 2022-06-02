@@ -133,7 +133,7 @@ def dodcae(start_date = str, end_date = str, csvfile = False):
         organizations_dic = {'<p>':'','\'':'','[':'',']':'','&amp':'','The':'','Inc':'',';':'','.':'','"':''}
         locations_dic = {'\'':'','[':'',']':''}
         monetary_dic = {'$':'',',':'','\'':'','[':'',']':''}
-        #Collect [Monetary, Organizations, Location, Month, Day, Year, Quarter, Approximate Ticker, Link, and MD5 Hash Data] database fields. 
+        #Collect [Monetary, Organizations, Location, Month, Day, Year, Quarter, Link, MD5 Hash Data, and Ticker] database fields. 
         monetary = re.findall(r'(\$\d+\,\d{3}\,\d{3}\,?\d{0,3})', (x))[0:1]
         organizations = re.findall(r'^(.+?),', (x))
         locations = re.findall(r'(Alabama|Alaska|Arizona|Arkansas|Australia|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Puerto Rico|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming/)', (x))[0:1]
@@ -148,7 +148,7 @@ def dodcae(start_date = str, end_date = str, csvfile = False):
             organizations = "".join([str.replace(key, value) for str in organizations])
         for key, value in monetary_dic.items():
             monetary = "".join([str.replace(key, value) for str in monetary])
-        return organizations, monetary, locations, month, day, year, quarter, ticker(organizations), link, link_hash
+        return organizations, monetary, locations, month, day, year, quarter, link, link_hash, ticker(organizations)
         
     with ProcessPoolExecutor(max_workers=None) as executor:
         data = list(executor.map(regex_run, para_aggregation()))
@@ -156,7 +156,7 @@ def dodcae(start_date = str, end_date = str, csvfile = False):
 
     #Cleanse Data and Export to CSV.
     pd.set_option('display.max_colwidth', None)
-    df = pd.DataFrame(data, columns =['Organizations', 'Monetary', 'Location', 'Month', 'Day', 'Year', 'Quarter', 'Approximate Ticker', 'Link', 'Link MD5 Hash'])
+    df = pd.DataFrame(data, columns =['Organizations', 'Monetary', 'Location', 'Month', 'Day', 'Year', 'Quarter', 'Link', 'Link MD5 Hash', 'Ticker'])
     df[["Monetary", "Month", "Day", "Year"]] = df[["Monetary", "Month", "Day", "Year"]].apply(pd.to_numeric)
     df['Organizations'] = df['Organizations'].apply(lambda x: ' '.join(x.split(maxsplit=3)[:3]))
     
