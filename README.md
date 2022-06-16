@@ -12,10 +12,6 @@ DoDCAE was developed to efficiently identify IT service contracting organization
 
 Example: We noticed an uptick in cybercrime throughout the pandemic, which ignited an uptick in cybersecurity consultations, thus allowing lesser recognized contracting companies to gain footing via subcontracting and prime awarding cyber gigs on DoD contracts that can be personally tracked using DoDCAE.
 
-<p align="center">
-  <img src="https://github.com/TrevonWilkins/DoD-Contract-Award-Extractor/blob/main/examples/Graphic%20Visualization%202.PNG" />
-</p>
-
 *DoDCAE tracks all contracting awards. It's not exclusive to cyber-related awarding.
 
 ### CONTRIBUTION
