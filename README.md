@@ -18,9 +18,6 @@ Example: We noticed an uptick in cybercrime throughout the pandemic, which ignit
 
 *DoDCAE tracks all contracting awards. It's not exclusive to cyber-related awarding.
 
-### PREREQUISITES
-This program was developed on 64-bit Linux; however, it is possible to install and run this program on most platforms with minor code modifications.
-
 ### CONTRIBUTION
 Issue Tracker: [https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues](https://github.com/TrevonWilkins/DOD_Defense_Contracts/issues)
 
